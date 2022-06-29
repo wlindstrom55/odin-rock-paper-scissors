@@ -24,17 +24,35 @@ function play(cleanPrompt, computerSelection) {
     let cleanPS = cleanPrompt;
     let retVal;
     let didIWin;
+
+    //const container = document.querySelector('.results');
+
 if (cleanPS == 'Rock' && computerSelection == 'Rock') {
     retVal = `There was a tie! You and the opponent both chose ${cleanPS}`;
     didIWin = 'Tie';
+    
+    // const contentRockTie = document.createElement('div');
+    // contentRockTie.classList.add('contentRockTie');
+    // contentRockTie.textContent = retVal;
+    // console.log("test");
 }
 if (cleanPS == 'Rock' && computerSelection == 'Paper') {
     retVal = 'You lose! Paper beats rock.';
     didIWin = 'Loss';
+
+    // const contentRockLoss = document.createElement('div');
+    // contentRockLoss.classList.add('contentRockLoss');
+    // contentRockLoss.textContent = retVal;
+    // console.log("test");
 }
-if (cleanPS == 'Rock' && computerSelection == 'Acissors') {
+if (cleanPS == 'Rock' && computerSelection == 'Scissors') {
     retVal = 'You win! Rock crushes scissors.';
     didIWin = 'Win';
+
+    // const contentRockWin = document.createElement('div');
+    // contentRockWin.classList.add('contentRockWin');
+    // contentRockWin.textContent = retVal;
+    // console.log("test");
 }
 if (cleanPS == 'Paper' && computerSelection == 'Rock') {
     retVal = 'You win! Paper suffocates rock.';
@@ -72,35 +90,62 @@ function cleanPrompt(input) {
     return d;
 }
 
+//this function will perform the work of playing the game and then extracting the results to our results div
+function extract(pChoice) {
+    let results = play(pChoice, computerPlay());
+    let didIWin = results.pop();
+    let response = results.pop();
+    const resultsContainer = document.querySelector('.results')
+    resultsContainer.textContent = `"${response}"`;
+}
+
+//Rock button
+const rockb = document.querySelector('.rockB');
+rockb.addEventListener('click', function (){ //must be done with callback function
+    extract('Rock');
+});
+//Paper button
+const paperb = document.querySelector('.paperB');
+paperb.addEventListener('click', function (){
+    extract('Paper');
+});
+//Scissors button
+const scissorsb = document.querySelector('.scissorsB');
+scissorsb.addEventListener('click', function (){
+    extract('Scissors');
+});
+
+//play('rock', computerPlay)
+
 //4th function will be a loop that plays the game in multiple rounds.
-function game() {
-    let counter = 0;
-    let winCounter = 0;
-    let lossCounter = 0;
-    let tieCounter = 0;
-    let z;
-for (let i = 0; i < 5; i++) {
-    let playerAnswer = prompt();
-    let cleanPA = cleanPrompt(playerAnswer);
-    let cleanCA = cleanPrompt(computerPlay());
-    z = play(cleanPA, cleanCA);
-    if (z[1] == 'Tie') {
-        tieCounter++;
-    }
-    if (z[1] == 'Loss') {
-        lossCounter++;
-    }
-    if (z[1] == 'Win') {
-        winCounter++;
-    }
-    console.log('Round number: ' + counter);
-    console.log(z);
-    counter++;
-}
-console.log('There were: ' + winCounter + ' wins; ' + lossCounter + " losses; " + tieCounter + ' ties. Game Over!');
-return z;
-}
-game();
+// function game() {
+//     let counter = 0;
+//     let winCounter = 0;
+//     let lossCounter = 0;
+//     let tieCounter = 0;
+//     let z;
+// for (let i = 0; i < 5; i++) {
+//     let playerAnswer = prompt();
+//     let cleanPA = cleanPrompt(playerAnswer);
+//     let cleanCA = cleanPrompt(computerPlay());
+//     z = play(cleanPA, cleanCA);
+//     if (z[1] == 'Tie') {
+//         tieCounter++;
+//     }
+//     if (z[1] == 'Loss') {
+//         lossCounter++;
+//     }
+//     if (z[1] == 'Win') {
+//         winCounter++;
+//     }
+//     console.log('Round number: ' + counter);
+//     console.log(z);
+//     counter++;
+// }
+// console.log('There were: ' + winCounter + ' wins; ' + lossCounter + " losses; " + tieCounter + ' ties. Game Over!');
+// return z;
+// }
+// game();
 
 //computerPlay();
 
